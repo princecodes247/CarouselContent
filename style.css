@@ -1,86 +1,124 @@
-*,*::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Viaoda Libre', cursive;
-    
-font-family: 'Joan', serif;
+  font-family: "Viaoda Libre", cursive;
+
+  font-family: "Joan", serif;
+  height: max-content;
+  /* overflow: hidden; */
 }
 
 h1 {
-    font-family: 'Cinzel Decorative', cursive;
+  font-family: "Cinzel Decorative", cursive;
 }
-
+button {
+  font-family: "Joan", serif;
+  cursor: pointer;
+  transition: all 200ms;
+}
+button:hover {
+  filter: brightness(110%);
+}
 .logo {
-    font-family: 'Cinzel Decorative', cursive;
+  font-family: "Cinzel Decorative", cursive;
 }
 
 header {
-    height: 12vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    padding: 1em 4em;
-    position: fixed;
+  height: 12vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1em 4em;
+  position: fixed;
+  z-index: 10;
 }
 
 .hero_sect {
-    height: 100vh;
-    width: 100%;
-    background: #D49050;
-    padding: 0 3em;
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    transition: background 500ms;
+  height: 100vh;
+  width: 100%;
+  background: #fff;
+  padding: 0 3em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  transition: background 500ms;
+  overflow: hidden;
 }
 
-.hero_img, .hero_text {
-    flex: 1;
-    
-    transition: all 300ms;
+.hero_img,
+.hero_text {
+  flex: 1;
+
+  transition: all 300ms;
 }
 
 .hero_img {
-    display: flex;
-    justify-content: center;
-    /* align-items: center; */
-    /* background: #000; */
-    height: 100%;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  /* background: #000; */
+  height: 100%;
+  overflow: hidden;
 }
-.hero_img img{
-    height: 100%;
-    box-shadow: 20px 0px 0 0 #2222;
-    /* transform: translate(-5%, -5%); */
+.hero_img img {
+  height: 100%;
+  box-shadow: 20px 0px 0 0 #2222;
+  /* transform: translate(-5%, -5%); */
+  transform: scale(1);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  transition: all cubic-bezier(0.76, 0, 0.24, 1) 500ms 150ms;
 }
-
 
 .hero_text {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    padding: 1em;
-    align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding-left: 1em;
+  align-items: start;
+  transform: translateY(0px);
 }
 
 .hero_text h1 {
-    font-size: 3.5rem;
+  font-size: 3.5rem;
+}
+.hero_text p {
+  /* font-size: 3.5rem; */
+  color: #343434;
 }
 
-.hero_text button {
-    padding: 1em 2em;
+.hero_button {
+  padding: 0.8em 2em;
+  background: #d49050;
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .fade-out {
-    opacity: 0;
+  opacity: 0;
+}
+
+.hero_img.fade-out img {
+  clip-path: polygon(0 0, 0% 0, 0% 100%, 0% 100%);
+  transform: scale(1.01);
+}
+
+.hero_text.fade-out {
+  /* opacity: 1; */
+  transform: translateY(-5px);
 }
 
 .hidden {
-    pointer-events: none;
-    display: none;
+  pointer-events: none;
+  display: none;
 }
 
 /* .hero_text:first-child + .hero_img, .hero_text:first-child {
@@ -90,24 +128,67 @@ header {
 } */
 
 .hero_markers {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    position: absolute;
-    bottom: 4%;
-    left: 50%;
-    transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  position: absolute;
+  bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .hero_marker {
-    --size: 20px;
-    width: var(--size);
-    height: var(--size);
-    border-radius: 99px;
-    background: red;
-    border: 4px solid #efefef;
+  --size: 10px;
+  width: var(--size);
+  height: var(--size);
+  cursor: pointer;
+  border-radius: 99px;
+  background: #aaa;
+  /* border: 4px solid #8a8a8a; */
 }
 
 .hero_marker.current_mark {
-    background: green;
+  background: #d49050;
+}
+
+@media screen and (max-width: 768px) {
+  .hero_sect {
+    height: 120vh;
+    padding: 0 1em;
+    flex-direction: column-reverse;
+  }
+  .hero_text {
+    align-items: center;
+  }
+  .hero_text h1 {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  .hero_text p {
+    /* font-size: 1.5rem; */
+    text-align: center;
+  }
+  .hero_img {
+    flex: 1;
+    height: 70%;
+  }
+
+  .hero_markers {
+    bottom: unset;
+    /* background: #000; */
+    margin-bottom: 1.5em;
+  }
+}
+
+/* Hero section end */
+
+footer {
+  height: 12vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em 4em;
+  bottom: 0;
+  background: #fafafa;
 }

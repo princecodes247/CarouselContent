@@ -25,13 +25,24 @@ async function changeSlide(currPos, nextPos) {
   heroTexts[nextPos].classList.remove("fade-out");
   heroImgs[nextPos].classList.remove("fade-out");
 }
-
 // changeSlide(0,1)
 
 let currPos = 0;
-setInterval(() => {
-  let nextPos = currPos < heroTexts.length - 1 ? currPos + 1 : 0;
-  console.log(nextPos, currPos);
-  changeSlide(currPos, nextPos);
-  currPos = nextPos;
-}, 5000);
+let sliderLoop = () => {
+    let nextPos = currPos < heroTexts.length - 1 ? currPos + 1 : 0;
+    console.log(nextPos, currPos);
+    changeSlide(currPos, nextPos);
+    currPos = nextPos;
+  } 
+
+let mainInterval = setInterval(sliderLoop, 8000);
+
+
+heroMarkers.forEach((marker, index) => {
+  marker.addEventListener("click", () => {
+    changeSlide(currPos, index);
+    currPos = index;
+    clearInterval(mainInterval)
+    mainInterval = setInterval(sliderLoop, 8000);
+  })
+});
