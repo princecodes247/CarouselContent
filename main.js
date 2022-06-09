@@ -19,7 +19,7 @@ async function changeSlide(currPos, nextPos) {
   heroTexts[nextPos].classList.remove("hidden");
   heroImgs[nextPos].classList.remove("hidden");
 
-  await sleep(200);
+  await sleep(300);
   console.log("ran");
   heroSect.style.background = heroTexts[nextPos].dataset.color;
   heroTexts[nextPos].classList.remove("fade-out");
@@ -34,4 +34,4 @@ setInterval(() => {
   console.log(nextPos, currPos);
   changeSlide(currPos, nextPos);
   currPos = nextPos;
-}, 2000);
+}, 5000);
